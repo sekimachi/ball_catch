@@ -25,7 +25,7 @@ class BallCatch(Node):
         
 
     def capture_cb(self, msg: Bool):
-        self.GC_pub.publish(GeneralCommand(target="arm", param=0)) #param=0はアームを下げるっぽい
+        self.GC_pub.publish(GeneralCommand(target="ball", param=1)) #param=1はボールをキャッチする
 
 
     # ===============================
@@ -33,13 +33,8 @@ class BallCatch(Node):
     # ===============================
     def progress_cb(self, msg: RobotActionProgress):
         self.progress_msg = msg
-
-        if msg.target == "arm" and msg.param == "down" and msg.state == "OK":
-            self.get_logger().info('アームの下降完了')
-            self.GC_pub.publish(GeneralCommand(target="arm", param=1)) #param=1はアームを上げる気がする
-        
-        elif msg.target == "arm" and msg.param == "up" and msg.state == "OK":
-            self.get_logger().info('アームの上昇完了')
+        if msg.target == "ball" and msg.param == "catch"  and msg.state == "OK":
+            self.get_logger().info('ボールをキャッチ完了')
             self.back_pub.publish(Bool(data=True)) #ボールをキャッチしたことを伝える
    
 
