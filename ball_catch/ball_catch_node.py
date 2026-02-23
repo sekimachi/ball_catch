@@ -29,7 +29,7 @@ class BallCatch(Node):
 
 
     # ===============================
-    # robot_action_progressのコールバック。
+    # robot_progressのコールバック。
     # ===============================
     def progress_cb(self, msg: RobotActionProgress):
         self.progress_msg = msg
