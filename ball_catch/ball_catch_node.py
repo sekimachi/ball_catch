@@ -17,6 +17,7 @@ class BallCatch(Node):
         # ===== Publisher =====
         self.back_pub = self.create_publisher(Bool, 'ball_back', 10)
         self.GC_pub = self.create_publisher(GeneralCommand,'robot_command',10)
+        self.status_pub = self.create_publisher(Bool,'detect_ball_status',10)
 
         # ===== Subscriber =====
         self.create_subscription(Bool, 'ball_capture', self.capture_cb, 10)
@@ -36,6 +37,14 @@ class BallCatch(Node):
         if msg.target == "ball" and msg.param == "catch"  and msg.state == "OK":
             self.get_logger().info('ボールをキャッチ完了')
             self.back_pub.publish(Bool(data=True)) #ボールをキャッチしたことを伝える
+
+        elif msg.target == "ball" and msg.param == "catch"  and msg.state == "NG":
+            self.get_logger().info('ボールをキャッチ失敗actionをにFalseを返す')
+            self.status_pub.publish(Bool(data=False))
+
+        elif msg.target == "ball" and msg.param == "catch"  and msg.state == "Timeout":
+            self.get_logger().info('Timeout、actionをにFalseを返す')
+            self.status_pub.publish(Bool(data=False))
    
 
 
