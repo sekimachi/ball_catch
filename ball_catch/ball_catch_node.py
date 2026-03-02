@@ -40,14 +40,13 @@ class BallCatch(Node):
             self.back_pub.publish(Bool(data=True)) #ボールをキャッチしたことを伝える
 
         elif msg.target == "ball" and msg.param == "catch"  and msg.state == "NG":
-            self.get_logger().info('ボールをキャッチ失敗actionをにFalseを返す')
-            self.status_pub.publish(Bool(data=False))
+            self.get_logger().info('ボールをキャッチ失敗')
+            self.re_detect_pub.publish(Bool(data=True))
 
         elif msg.target == "ball" and msg.param == "catch"  and msg.state == "Timeout":
-            self.get_logger().info('Timeout、再びdetedtorを始動する')
-            self.re_detect_pub.publish(Bool(data=True))
-            #self.status_pub.publish(Bool(data=False))
-   
+            pass
+
+
 
 
 def main():
