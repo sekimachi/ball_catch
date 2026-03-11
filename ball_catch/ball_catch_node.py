@@ -35,7 +35,7 @@ class BallCatch(Node):
     # ===============================
     def tanav2_position_cb(self, msg: Bool):
         self.GC_pub.publish(GeneralCommand(target="ball", param=4)) #param=4はアームを中立状態にする
-
+        self.get_logger().info('中立位置にするように命令を送りました。')
 
     # ===============================
     # robot_progressのコールバック。
