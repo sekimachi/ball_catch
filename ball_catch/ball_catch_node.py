@@ -23,11 +23,18 @@ class BallCatch(Node):
         # ===== Subscriber =====
         self.create_subscription(Bool, 'ball_capture', self.capture_cb, 10)
         self.create_subscription(RobotActionProgress, 'robot_progress', self.progress_cb, 10)
+        self.create_subscription(Bool, 'tanav2_position', self.tanav2_position_cb, 10)
         
         
 
     def capture_cb(self, msg: Bool):
         self.GC_pub.publish(GeneralCommand(target="ball", param=1)) #param=1はボールをキャッチする
+
+    # ===============================
+    # tanav2_positionのコールバック。(アームを中立状態にする命令を送るためのもの)
+    # ===============================
+    def tanav2_position_cb(self, msg: Bool):
+        self.GC_pub.publish(GeneralCommand(target="ball", param=4)) #param=4はアームを中立状態にする
 
 
     # ===============================
