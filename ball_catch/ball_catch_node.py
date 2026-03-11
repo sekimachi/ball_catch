@@ -29,7 +29,7 @@ class BallCatch(Node):
 
     def capture_cb(self, msg: Bool):
         self.GC_pub.publish(GeneralCommand(target="ball", param=1)) #param=1はボールをキャッチする
-
+        self.get_logger().info('ボールをキャッチするように命令を送りました。')
     # ===============================
     # tanav2_positionのコールバック。(アームを中立状態にする命令を送るためのもの)
     # ===============================
