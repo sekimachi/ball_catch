@@ -29,7 +29,7 @@ class BallCatch(Node):
         
 
     def cali_cb(self, msg: Bool):
-        self.GC_pub.publish(GeneralCommand(target="ball", param=5)) #param=5はキャリブレーションする
+        self.GC_pub.publish(GeneralCommand(target="calibration", param=2)) #param=5はキャリブレーションする
         self.get_logger().info('キャリブレするように命令を送りました。')
 
     def capture_cb(self, msg: Bool):
